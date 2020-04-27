@@ -3,6 +3,8 @@ class UserModel {
   String nick;
   DateTime birthdate;
   String role;
-  int orientation;
+  String orientation;
   String fetish;
+
+  UserModel({this.id, this.nick, this.birthdate, this.role, this.orientation, this.fetish});
 }

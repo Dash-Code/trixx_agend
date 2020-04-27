@@ -1,9 +1,17 @@
 import 'package:app/providers/user_provider.dart';
 import 'package:app/screens/home/home_screen.dart';
+import 'package:app/services/sqlite/sqlite_manager.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_stetho/flutter_stetho.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  if(!kReleaseMode)
+    Stetho.initialize();
+  SqliteManager();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -12,6 +20,7 @@ class MyApp extends StatelessWidget {
     return  MultiProvider(
         providers: [
           ChangeNotifierProvider( create: (_) => UserProvider(), ),
+          ChangeNotifierProvider( create: (_) => SqliteManager(), ),
         ],
         child: MaterialApp(
             title: 'Trixx Agend',
